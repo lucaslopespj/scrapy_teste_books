@@ -9,6 +9,7 @@ class BooksSpider(scrapy.Spider):
     def parse(self, response):
         titulos = response.xpath('//li[@class="col-xs-6 col-sm-4 col-md-3 col-lg-3"]//h3/a/@title').extract()
         prices = response.xpath('//div[@class = "product_price"]/p[@class = "price_color"]/text()').extract()
+        
         for i in range(len(titulos)):
             yield {
                 'name':titulos[i],
@@ -22,8 +23,9 @@ class BooksSpider(scrapy.Spider):
 
         url = self.base_url + url[0]
 
-        print('###################################################')
-        print(url)
+        # print('###################################################')
+        # print(url)
+        
         yield scrapy.Request(url=url, callback=self.parse)
 
 
